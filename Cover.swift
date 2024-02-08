@@ -36,6 +36,7 @@ struct Cover : View {
             
             if textIsShown {
                 Text("Kolintang\nWood Instrument")
+                    .foregroundStyle(Color.black2)
                     .font(.system(size: 60))
                     .fontWeight(.bold)
                     .lineLimit(nil)
@@ -47,6 +48,7 @@ struct Cover : View {
             HStack {
                 Spacer()
                 Text("Swipe Left to read more >>>")
+                    .foregroundStyle(Color.black2)
                     .font(.system(size: 35))
                     .fontWeight(.medium)
                     .padding(.trailing, 20)

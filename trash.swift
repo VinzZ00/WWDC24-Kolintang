@@ -55,20 +55,3 @@
 //        return viewControllers![index + 1]
 //    }
 //}
-
-
-//{
-//    VStack {
-//        Spacer()
-//        HillShape()
-//            .foregroundColor(Color.init(hex: "#A7F683"))
-//            .offset(y: (UIScreen.main.bounds.height * 3 / 5) / 2)
-//            .frame(width: UIScreen.main.bounds.width + 100, height: UIScreen.main.bounds.height)
-//            
-////                Spacer();
-////                Circle()
-////                    .frame(width: UIScreen.main.bounds.width * 4, height: UIScreen.main.bounds.height * 3 / 5)
-////                    .foregroundColor(Color.init(hex: "#A7F683"))
-////                    .offset(y: (UIScreen.main.bounds.height * 3 / 5) / 2)
-//    }
-//}

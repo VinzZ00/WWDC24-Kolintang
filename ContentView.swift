@@ -62,8 +62,9 @@ struct UIKitRepresentable : UIViewControllerRepresentable {
         let pageView = UIKitPageView()
         pageView.pages = [
             UIHostingController(rootView: Cover()),
-            UIHostingController(rootView: IntroductionPage()),
-            UIHostingController(rootView: StoryPage(buttonHandler: buttonHandler))
+            UIHostingController(rootView: StoryPage()),
+            UIHostingController(rootView: IntroductionPage(buttonHandler: self.buttonHandler)),
+            
             
         ]
         return pageView

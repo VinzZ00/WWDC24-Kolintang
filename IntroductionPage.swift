@@ -25,6 +25,12 @@ struct IntroductionPage : View {
     @State var pageIndex = 0;
     var timer = Timer.publish(every: 3.0, on: .main, in: .default).autoconnect()
     
+    var buttonHandler : () -> Void
+    
+    init(buttonHandler: @escaping () -> Void) {
+        self.buttonHandler = buttonHandler
+    }
+    
     private var images : [Image] = [
         Image("image_1"),
         Image("image_2"),
@@ -72,38 +78,53 @@ struct IntroductionPage : View {
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 2 / 4)
             .padding(.bottom, 20)
             
-            HStack {
-                Text("Kolintang from Minahasa Land")
-                    .font(.system(size: 60))
-                    .fontWeight(.bold)
-                    .padding(.leading, 16)
-                Spacer()
-            }
-            .padding(.bottom, 10) // MARK: Total Spacing : 20
+//            HStack {
+//                Text("Kolintang from Minahasa Land")
+//                    .font(.system(size: 60))
+//                    .fontWeight(.bold)
+//                    .padding(.leading, 16)
+//                Spacer()
+//            }
+//            .padding(.bottom, 10) // MARK: Total Spacing : 20
             
             
-            buildText(text: "Kolintang is a traditional musical instrument of indonesia, from Minahasa, North Sulawesi. This instrument is made of woodn and is played by hitting it with a wooden hammer. The sound produced by the Kolintang is very calm and melodious")
-                .padding(.bottom, 20)
+            buildText(text: "Now, the place where the Minahasa native tribe lives is known as Tondano, located in North Sulawesi, Indonesia. Originally, the kolintang could produce notes ranging from low to 2 octaves. The kolintang consisted of several wooden pieces placed in a row above the player’s feet. The modern kolintang that we see today, which uses resonators, has been available since the arrival of Prince Diponegoro in Minahasa in 1830.")
+                .padding(.bottom, 10)
+                .padding(.leading, 16)
+                
             
             buildText(text: "The origin of the name Kolintang is inspired by the tones produced by a musical instrument, such as \"Tong\" for low tones, \"Ting\" for high tones, and \"Tang\" when we combine three of them together it becom \"Tong Ting Tang\" while expressing the sentence \"Maimo Kumolintang\" means \"let's Tong Ting Tang\" in minahasa language, to encourage people to play it. Over time, this expression evolved into the term Kolintang.")
-            
+                .padding(.leading, 16)
             Spacer()
+            
             HStack {
                 Spacer()
+                Button {
+                    buttonHandler()
+                } label: {
+                    Text("Try Kolintang")
+                        .font(.system(size: 30))
+                        .fontWeight(.bold)
+                        .padding(.leading, 32)
+                        .padding(.trailing, 32)
+                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                }
+                .padding(.trailing, 20)
                 ZStack(alignment: .center) {
                     Image(systemName: "music.quarternote.3")
                         .resizable()
                         .opacity(0.1)
                         .scaledToFit()
                         .frame(width: 80, height: 80)
-                    Text("1")
+                    Text("2")
                         .font(.system(size: 25))
                         .fontWeight(.bold)
                 }
                 .padding(.trailing, 16)
-                .padding(.bottom, 10)
-                
-            }
+            }.padding(.bottom, 20)
         }.background(Color.init(hex: "#A7F683").opacity(0.2))
     }
     
@@ -112,8 +133,6 @@ struct IntroductionPage : View {
         HStack{
             Text(text)
                 .font(.system(size: 28))
-                .padding(.leading, 16)
-                .padding(.trailing, 16)
                 .multilineTextAlignment(.leading)
                 .lineLimit(nil)
         }.padding(.bottom, 10)
