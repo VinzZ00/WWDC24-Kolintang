@@ -78,17 +78,8 @@ struct IntroductionPage : View {
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 2 / 4)
             .padding(.bottom, 20)
             
-//            HStack {
-//                Text("Kolintang from Minahasa Land")
-//                    .font(.system(size: 60))
-//                    .fontWeight(.bold)
-//                    .padding(.leading, 16)
-//                Spacer()
-//            }
-//            .padding(.bottom, 10) // MARK: Total Spacing : 20
             
-            
-            buildText(text: "Now, the place where the Minahasa native tribe lives is known as Tondano, located in North Sulawesi, Indonesia. Originally, the kolintang could produce notes ranging from low to 2 octaves. The kolintang consisted of several wooden pieces placed in a row above the player’s feet. The modern kolintang that we see today, which uses resonators, has been available since the arrival of Prince Diponegoro in Minahasa in 1830.")
+            buildText(text: "Now, the place where the Minahasa native tribe lives is known as Tondano, located in North Sulawesi, Indonesia. Originally, the kolintang could produce notes ranging from low to 2 octaves, and is consisted of several wooden pieces placed in a row above the player’s feet. The modern kolintang that we see today, which uses resonators, has been available since the arrival of Prince Diponegoro in Minahasa in 1830.")
                 .padding(.bottom, 10)
                 .padding(.leading, 16)
                 
@@ -104,12 +95,13 @@ struct IntroductionPage : View {
                 } label: {
                     Text("Try Kolintang")
                         .font(.system(size: 30))
+                        .foregroundStyle(Color.init(hex: "#F06543"))
                         .fontWeight(.bold)
                         .padding(.leading, 32)
                         .padding(.trailing, 32)
                         .padding(.top, 20)
                         .padding(.bottom, 20)
-                        .background(Color.white)
+                        .background(Color.init(hex: "#D2D0BA"))
                         .cornerRadius(20)
                 }
                 .padding(.trailing, 20)
@@ -119,7 +111,7 @@ struct IntroductionPage : View {
                         .opacity(0.1)
                         .scaledToFit()
                         .frame(width: 80, height: 80)
-                    Text("2")
+                    Text("3")
                         .font(.system(size: 25))
                         .fontWeight(.bold)
                 }

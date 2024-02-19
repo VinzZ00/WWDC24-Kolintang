@@ -10,18 +10,51 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
-    var audioManager = AudioManager.shared
+    
     @State var isEnterKolintang : Bool = false
     var body: some View {
         NavigationStack {
-            UIKitRepresentable{
-                print("Todo, add Button handler to enter the Kolintang")
+            PageViewUIKitRepresentable {
                 isEnterKolintang = true
-                print("Entering kolintang boolean : \(isEnterKolintang)")
             }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-        }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .navigationDestination(isPresented: $isEnterKolintang) {
+                    KolintangView()
+                        .toolbar(.hidden)
+                }
+        }.preferredColorScheme(.dark)
+    }
+}
+
+struct PageViewUIKitRepresentable : UIViewControllerRepresentable {
+    
+    var buttonHandler : () -> Void
+    
+    init(buttonHandler: @escaping () -> Void) {
+        self.buttonHandler = buttonHandler
+    }
+    
+    typealias UIViewControllerType = UIKitPageView
+    
+    func makeUIViewController(context: Context) -> UIKitPageView {
+        
+        
+        
+        let pageView = UIKitPageView()
+        pageView.pages = [
+            UIHostingController(rootView: Cover()),
+            UIHostingController(rootView: StoryPage1()),
+            UIHostingController(rootView: StoryPage2()),
+            UIHostingController(rootView: IntroductionPage(buttonHandler: self.buttonHandler)),
+            
+            
+        ]
+        return pageView
+    }
+    
+    func updateUIViewController(_ uiViewController: UIKitPageView, context: Context) {
+        // MARK: Update if needed
     }
 }
 
@@ -43,38 +76,4 @@ struct testingPage : View {
             }.background(color);
         }
     }
-}
-
-struct UIKitRepresentable : UIViewControllerRepresentable {
-    
-    var buttonHandler : () -> Void
-    
-    init(buttonHandler: @escaping () -> Void) {
-        self.buttonHandler = buttonHandler
-    }
-    
-    typealias UIViewControllerType = UIKitPageView
-    
-    func makeUIViewController(context: Context) -> UIKitPageView {
-        
-        
-        
-        let pageView = UIKitPageView()
-        pageView.pages = [
-            UIHostingController(rootView: Cover()),
-            UIHostingController(rootView: StoryPage()),
-            UIHostingController(rootView: IntroductionPage(buttonHandler: self.buttonHandler)),
-            
-            
-        ]
-        return pageView
-    }
-    
-    func updateUIViewController(_ uiViewController: UIKitPageView, context: Context) {
-        // MARK: Update if needed
-    }
-    
-    
-    
-    
 }

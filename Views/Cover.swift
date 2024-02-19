@@ -8,7 +8,6 @@
 /*
  Reference:
  https://www.detik.com/bali/berita/d-6547081/kolintang-berasal-dari-mana-asal-usul-dan-cara-memainkannya
-
  */
 
 import Foundation
@@ -16,9 +15,12 @@ import SwiftUI
 
 struct Cover : View {
     
-    @State private var yOffset: CGFloat = UIScreen.main.bounds.height
-    @State private var textIsShown = false
-    @State private var textOpacity : CGFloat = 0
+    @State var yOffset: CGFloat = UIScreen.main.bounds.height
+    @State var textIsShown = false
+    @State var textOpacity : CGFloat = 0
+    @State var showStory = false
+    @State var isSwiping: Bool = false
+    
     var body : some View {
         VStack {
             Image("KolintangCover")
@@ -26,7 +28,7 @@ struct Cover : View {
                 .scaledToFit()
                 .frame(width: UIScreen.main.bounds.width * 2/3)
                 .padding(.top, 200)
-                .padding(.bottom, 100)
+                .padding(.bottom, 50)
                 .offset(y: yOffset)
                 .onAppear {
                     withAnimation(.easeInOut(duration: 1.0)) {
@@ -36,19 +38,18 @@ struct Cover : View {
             
             if textIsShown {
                 Text("Kolintang\nWood Instrument")
-                    .foregroundStyle(Color.black2)
                     .font(.system(size: 60))
                     .fontWeight(.bold)
                     .lineLimit(nil)
                     .multilineTextAlignment(.center)
+                    .padding(.bottom, 50)
             }
-                
+            
             
             Spacer()
             HStack {
                 Spacer()
-                Text("Swipe Left to read more >>>")
-                    .foregroundStyle(Color.black2)
+                Text("Swipe the page to start the story")
                     .font(.system(size: 35))
                     .fontWeight(.medium)
                     .padding(.trailing, 20)
@@ -57,8 +58,24 @@ struct Cover : View {
                     .onAppear {
                         withAnimation(.easeInOut(duration: 0.8)) {
                             textOpacity = 1
+                            startAutoSwipeTimer()
                         }
                     }
+                    .gesture(
+                        DragGesture()
+                            .onChanged { _ in
+                                withAnimation {
+                                    isSwiping = true
+                                }
+                            }
+                            .onEnded { _ in
+                                withAnimation {
+                                    isSwiping = false
+                                    showStory = false
+                                    startAutoSwipeTimer()
+                                }
+                            }
+                    )
             }
         }.onAppear{
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
@@ -81,6 +98,14 @@ struct Cover : View {
                     Spacer()
                 }
             }.background(Color.init(hex: "#A7F683").opacity(0.2))
+        }
+    }
+    
+    func startAutoSwipeTimer() {
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { _ in
+            withAnimation {
+                showStory = false
+            }
         }
     }
 }

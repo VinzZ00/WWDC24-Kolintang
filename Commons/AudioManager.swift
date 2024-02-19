@@ -17,7 +17,7 @@ enum AudioManagerError : Error {
 class AudioManager: ObservableObject {
     private var audioPlayers: [String : AVAudioPlayer] = [ : ]
     
-    init() throws {
+    private init() throws {
         try setupAudioSession()
         try loadAudioFiles()
     }
@@ -46,7 +46,7 @@ class AudioManager: ObservableObject {
         }
     }
     
-    func playSounds(for notes: String) throws {
+    func playSound(for notes: String) throws {
         let player = audioPlayers[notes]!
         player.currentTime = 0 // Rewind to the beginning
         player.play()
